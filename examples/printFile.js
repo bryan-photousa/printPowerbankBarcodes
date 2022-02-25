@@ -1,4 +1,6 @@
 // use: node printFile.js [filePath printerName]
+//read composite filename and send to printer
+
 var printer = require("../lib"),
     filename = process.argv[2] || __filename;
 

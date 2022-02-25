@@ -43,6 +43,7 @@
   ],
   "main": "./lib/printer",
   "dependencies": {
+    "dotenv": "^16.0.0",
     "nan": "^2.14.1",
     "prebuild-install": "^5.3.4"
   }
