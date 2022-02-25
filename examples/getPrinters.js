@@ -6,10 +6,6 @@ const printer = require('../lib'),
 
 let allPrinters = util.inspect(printer.getPrinters())
 
-// let connectedPrinter = allPrinters.filter((value) => {
-//   return value.name == process.env['PRINTER']
-// })
-
 function malformedJSON2Array(malformedArr) {
   var arr = []
   malformedArr = malformedArr.replace(/^\{|\}$/g, '').split(',')
