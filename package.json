@@ -43,6 +43,7 @@
   ],
   "main": "./lib/printer",
   "dependencies": {
+    "axios": "^0.26.0",
     "dotenv": "^16.0.0",
     "nan": "^2.14.1",
     "prebuild-install": "^5.3.4"
