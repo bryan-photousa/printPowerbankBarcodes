@@ -1,4 +1,3 @@
-//read composite filename and send to printer
 var fs = require('fs');
 var fsExtra = require('fs-extra');
 const { get } = require('http');
@@ -13,14 +12,14 @@ const opts = {
 }
 
 const logger = log.createSimpleLogger( opts );
-logger.info("Printing Barcodes OP and setting Printed Items to Printed Status");
+logger.info("Printing Barcodes IP");
 
 let homePath = `${__dirname}`;
 let regex = /[.]pdf$/;
 fs.readdirSync(`${homePath}`).filter(f => regex.test(f)).forEach(f => fs.unlinkSync(homePath + '/' + f));
 logger.info("Removed Old Pdf Files From Local Directory");
 
-baseNasPath = '\\\\10.100.50.31\\nas\\48\\Zazzle\\auto_print\\openprint';
+baseNasPath = '\\\\10.100.50.31\\nas\\48\\Zazzle\\auto_print\\iprint';
 
 let nas103Path = `${baseNasPath}\\batch_downloaded_PowerBank_103`;
 let nas104Path = `${baseNasPath}\\batch_downloaded_PowerBank_104`;
@@ -69,7 +68,7 @@ async function printFile(filePath, filename, newFilePath) {
           let data = {
             "order_item_list_id": itemId
           }
-          PrintedService.setToPrinted(data).then(response => {
+          PrintedService.iprintSetToPrinted(data).then(response => {
             console.log("RESPONSE FROM OP");
             console.log(response);
             if (i == (itemIds.length - 1)) {
@@ -134,17 +133,17 @@ async function printFile(filePath, filename, newFilePath) {
         } else {
           logger.info("Barcode PDF Printed")
           console.log(filename);
-          logger.info(filename);
-          // let splitFilename = filename.split('_');
-          // let itemIds = splitFilename[0].split('-');
-          // console.log("ITEM IDS");
-          // console.log(itemIds);
-          // for (let i = 0; i < itemIds.length; i++) {
-          //   let itemId = parseInt(itemIds[i])
-          //   let data = {
-          //     "order_item_list_id": itemId
-          //   }
-          //   logger.info(`Setting to Printed Status: ${itemId}`)
+          logger.info(filename)
+          //let splitFilename = filename.split('_');
+          //let itemIds = splitFilename[0].split('-');
+          //console.log("ITEM IDS");
+          //console.log(itemIds);
+        //   for (let i = 0; i < itemIds.length; i++) {
+        //     let itemId = parseInt(itemIds[i])
+        //     let data = {
+        //       "order_item_list_id": itemId
+        //     }
+            //logger.info(`Setting to Printed Status: ${itemId}`)
             // PrintedService.setToPrinted(data).then(response => {
             //   console.log("RESPONSE FROM OP");
             //   console.log(response);
@@ -232,7 +231,3 @@ async function findBarcodeComposites(dirs, basePath, endPath) {
   }
   //return true;
 }
-
-// function moveAndRemove(oldFilePath, newFilePath) {
-//   fs.rename(oldFilePath, newFilePath);
-// }

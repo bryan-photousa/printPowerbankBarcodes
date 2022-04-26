@@ -12,9 +12,11 @@ const url = env.url;
 //console.log(process.env)
 console.log(url)
 const baseUrl = `${url}/change_order_item_list_to_printed`;
+const ipUrl = `${env.ipUrl}/change_order_item_list_to_printed`;
 
 module.exports = {
   setToPrinted: setToPrinted,
+  iprintSetToPrinted: iprintSetToPrinted
 }
 
 function setToPrinted(data) {
@@ -24,6 +26,15 @@ function setToPrinted(data) {
     data: data
   }
   return axios(`${baseUrl}`, config).then(responseSuccessHandler).catch(responseErrorHandler)
+}
+
+function iprintSetToPrinted(data) {
+  const config = {
+    method: "POST",
+    headers,
+    data: data
+  }
+  return axios(`${ipUrl}`, config).then(responseSuccessHandler).catch(responseErrorHandler)
 }
 
 const responseSuccessHandler = response => {
